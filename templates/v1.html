@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    form {
+      margin: auto;
+      width: 35%;
+    }
+
+    .result {
+      margin: auto;
+      width: 35%;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Select a file to upload</h2>
+  <p>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+  </p>
+  <form method="post" action="/" enctype="multipart/form-data">
+
+
+    <input type="file" name="file" autocomplete="off" required>
+
+
+
+    <input type="submit" value="Submit">
+
+  </form>
+  <br>
+  <div class="result" align="center">
+    {% if result %}
+    <p> Predicted Emotion:
+      <p style="font-size:50px">Gender: {{ gender }}</p>
+      <p style="font-size:50px">Mood: {{ mood }}</p>
+      {% endif %}
+  </div>
+</body>
+
+</html>

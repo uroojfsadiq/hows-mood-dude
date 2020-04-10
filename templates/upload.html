@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Speech Emotion Recognition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: auto;
+      font-family: 'Baloo Paaji 2', cursive;
+      color: white;
+      text-align: left;
+      line-height: 1.2em;
+      font-size: 18px;
+      font-weight: 500;
+
+    }
+
+    .header {
+
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(to bottom,
+          rgba(22, 22, 22, 0.3) 0%,
+          rgba(22, 22, 22, 0.7) 75%,
+          #161616 100%),
+        url('https://higginsmarketinggroup.com/wp-content/uploads/2016/08/Higgins-Marketing-Group-Great-Sales-Copy-Converting-Website-Visitors-Emotions.jpg');
+      /* url('https://images.squarespace-cdn.com/content/v1/5102c9cce4b0ef23f0dcf6a8/1532513742872-IFTMQ85XSJMGKGG4MM7A/ke17ZwdGBToddI8pDm48kJGwtEPJajrL8abrxezqqCtZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIgbf6F6qaQU5dvOhz7tDijIhgsdnrQhrHiJqT1Q-W9o4KMshLAGzx4R3EDFOm1kBS/GettyImages_170955996-56a794ec5f9b58b7d0ebe594.jpg'); */
+      background-position: top;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 50px 0px;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: auto;
+    }
+
+    h1 {
+      margin: 0px;
+      font-size: 90px;
+      font-weight: 600;
+      color: white;
+      line-height: 1em;
+      text-align: center;
+      /* text-transform: capitalize; */
+      text-transform: uppercase;
+
+    }
+
+    h2 {
+      font-size: 30px;
+      line-height: 1.2em;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+
+    h4 {
+      font-size: 35px;
+      color: white;
+      line-height: 1.2em;
+      text-align: center;
+      font-weight: 700;
+      color: cyan;
+    }
+
+    .desc {
+      max-width: 35%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 2px white solid;
+      padding: 40px;
+      margin-top: 50px;
+
+    }
+
+    .box {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    input,
+    input[type="file"i] {
+      padding: 10px 20px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 2px white solid;
+      color: white;
+      font-size: 18px;
+      font-family: 'Baloo Paaji 2', cursive;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    input[type="file"i] {
+      padding: 10px 10px;
+      width: 50%;
+
+      vertical-align: middle;
+      font-size: 16px;
+    }
+
+    .flashes {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <div class="container">
+      <h1>" Speech Emotion Recognition "</h1>
+      {% if intro %}
+      <div class='box'>
+        <div class="desc">
+          <h2>Introduction:</h2>
+          <p>Emotions play an extremely important role in human mental life. It is a medium of expression of one's
+            perspective or one's mental state to others. Speech Emotion Recognition (SER) can be defined as extraction
+            of the emotional state of the speaker from his or her speech signal.</p>
+          <h2>Usage:</h2>
+          <p>SER aims to recognize the underlying emotional state of a speaker from her voice. It can be used in the
+            interface with robots, audio surveillance, web-based E-learning,commercial applications, clinical studies,
+            entertainment, banking, call centers,cardboard systems, computer games, etc. For classroom or E-learning,
+            information about the emotional state of students can provide focus on the enhancement of teaching quality.
+          </p>
+        </div>
+        <div class="desc">
+          <h2>Description:</h2>
+          <p>The app allows you to upload a wav sound file or record one and it will predict how you sound emotionally
+            and suggest ways to be more positive.</p>
+          <h2>Technology Used:</h2>
+          <ul>
+            <li>Python 3.6</li>
+            <li>Flask</li>
+            <li>Librosa</li>
+            <li>Pickle</li>
+            <li>MLP</li>
+            <li>HTML/CSS :p</li>
+            <li>The model was trained on Jupyter Notebook</li>
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+      <div class="box">
+        <div class="desc" id="formSec">
+          <h2 style="text-align: center; text-transform: uppercase;"> You can either upload a file or record right now
+          </h2>
+          <h3> Select a file to uplaod: </h3>
+          <p>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class=flashes>
+              {% for message in messages %}
+              <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+          </p>
+          <form method="post" action="/" enctype="multipart/form-data">
+
+            <input type="file" name="file" autocomplete="off" required>
+            <dl></dl>
+            <input type="submit" value="Submit">
+
+          </form>
+
+        </div>
+        {% if result %}
+        <div class="desc">
+          <h2 style="text-align: center; text-transform: uppercase; line-height: 5px; font-size: 40px;">
+            PREDICTION
+          </h2>
+          <h3 style="text-align: center;line-height: 5px;"> -- Not so accurate but we tried .. :) --</h3>
+          <h4> You sound like you are <span style="text-transform: uppercase; font-size: 40px;">{{mood}}</span> </h4>
+          <h3 style="text-align: center; color: cyan;"> And you also sound like you are a <span
+              style="text-transform: uppercase; font-size: 25px;">{{gender}}</span>
+            but we not so sure </h3>
+
+
+
+        </div>
+        {% endif %}
+
+      </div>
+
+
+
+
+
+
+
+    </div>
+  </div>
+</body>
+
+</html>
